@@ -1,1 +1,4 @@
 *.asv
+.vscode
+*.exe
+output
