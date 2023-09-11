@@ -1,3 +1,6 @@
+clc
+clear all
+
 g=@(x)(tan(x)/4);
 a=-1;
 b=1;
