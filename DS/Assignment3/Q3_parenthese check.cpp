@@ -50,14 +50,31 @@ class Stack{
 };
 
 int main() {
-    string str;
-    cout<<"\nEnter a string: ";
+    char str[100];
+    cout<<"\nEnter the string: ";
     cin>>str;
-    Stack s(str.length());
-    for(unsigned/*here unsigned int used because str.length() is unsigned*/ int i=0;i<str.length();i++){
-        s.push(str[i]);
+    Stack s(sizeof(str)/sizeof(str[0]));
+    bool flag=false;
+    for(int i=0;str[i]!='\0';i++){
+        if(str[i]=='(' || str[i]=='{' || str[i]=='['){
+            s.push(str[i]);
+        }
+        else if(str[i]==')' || str[i]=='}' || str[i]==']'){
+            if(s.isEmpty()){
+                flag=true;
+            }
+
+            char ch=s.pop();
+
+            if((str[i]==')' && ch!='(') || (str[i]=='}' && ch!='{') || (str[i]==']' && ch!='[')){
+                flag=true;
+            }
+        }
     }
-    cout<<"\nReversed string: ";
-    s.display();
+    if(flag==false){
+        cout<<"\nBalanced";
+    }else{
+        cout<<"\nNot Balanced";
+    }
     return 0;
 }
